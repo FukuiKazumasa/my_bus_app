@@ -1,0 +1,334 @@
+<header>
+
+
+  <div class="header-container">
+
+    <div class="header-container2">
+      <%= link_to image_tag("application-logo-header.png", class:"application-logo-header"), "/" %>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+          <li class="nav-item active">
+            <% if user_signed_in? %>
+              <%= link_to 'マイページ', user_path(current_user[:id]), {class: "navbar-brand"} %>
+              <% else %>
+              <%= link_to "新規登録", new_user_registration_path, {class: "navbar-brand"} %>
+            <% end %>
+          </li>
+
+          <li class="nav-item active">
+            <% if user_signed_in? %>
+              <div type="button" class="navbar-brand" data-toggle="modal" data-target="#exampleModal" >新規投稿
+              </div>
+            <% end %>
+          </li>
+
+          <li class="nav-item active">
+          <% if user_signed_in? %>
+              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete , class: "navbar-brand" %>
+              <% else %>
+              <%= link_to "ログイン", new_user_session_path , {class: "navbar-brand"}%>
+            <% end %>
+          </li>
+
+
+          <li class="nav-item active">
+            <%= form_tag({controller:"posts",action:"index"}, method: :get) do %>
+              <%= text_field_tag :search , '', class: 'form-control mr-sm-2' %>
+          </li>
+
+          <li class="nav-item active">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
+            <% end %>
+          </li>
+        </ul>
+
+      </div>
+    </nav>
+
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">新規投稿</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><div class="batu">✖</div></span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                <%= form_for @post do |f| %>
+              
+              <div class="stuff-modal">
+
+                <div class="field">
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[age]" value="20歳未満"> 20歳未満
+                  </label>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[age]" value="20代"> 20代
+                  </label>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[age]" value="30代"> 30代
+                  </label>
+                  <br>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[age]" value="40代"> 40代
+                  </label>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[age]" value="50代"> 50代
+                  </label>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[age]" value="60代以上"> 60代以上
+                  </label>
+                </div>
+
+                  <p>バスブランド名</p>
+                <div class="textBox-newpost">
+                  <%= f.text_field :busname, :class =>"text", :autofocus=> true %>
+                  <label class="error"></label>
+                </div>
+            
+                <div class="field">
+                  <p>乗車曜日</p>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[week]" value="月曜日"> 月曜日
+                  </label>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[week]" value="火曜日"> 火曜日
+                  </label>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[week]" value="水曜日"> 水曜日
+                  </label>
+                  <br>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[week]" value="木曜日"> 木曜日
+                  </label>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[week]" value="金曜日"> 金曜日
+                  </label>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[week]" value="土曜日"> 土曜日
+                  </label>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[week]" value="日曜日"> 日曜日
+                  </label>
+                </div>
+
+                <div class="field">
+                  <p>座席タイプ</p>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[seattype]" value="４列"> ４列
+                  </label>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[seattype]" value="３列独立"> ３列独立
+                  </label>
+                  <br>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[seattype]" value="３列"> ３列
+                  </label>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[seattype]" value="２列"> ２列
+                  </label>
+                </div>
+
+                  <p>価格(円)</p>
+                <div class="textBox-newpost">
+                  <%= f.text_field :price, :class =>"text" %>
+                  <label class="error"></label>
+                </div>
+
+                <div class="field">
+                  <p>寝心地</p>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[sleep]" value="一睡もできなかった"> 一睡もできなかった
+                  </label>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[sleep]" value="時々目覚める"> 時々目覚める
+                  </label>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[sleep]" value="普通"> 普通
+                  </label>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[sleep]" value="翌朝疲れてない"> 翌朝疲れてない
+                  </label>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[sleep]" value="自宅さながらの寝心地"> 自宅さながらの寝心地
+                  </label>
+                </div>
+
+                <div class="field">
+                  <p>三密度</p>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[crowd]" value="満席・ほぼ満席"> 満席・ほぼ満席
+                  </label>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[crowd]" value="60~80%"> 60~80%
+                  </label>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[crowd]" value="40~60%"> 40~60%
+                  </label>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[crowd]" value="20~40%"> 20~40%
+                  </label>
+                  <label class="btn btn-warning">
+                    <input type="radio" name="post[crowd]" value="乗客は数人"> 乗客は数人
+                  </label>
+                </div>
+
+                <p>コメント</p>
+                <div class='field'>
+                  <%= f.text_area :comment,:placeholder =>'大阪東京間乗車。空いていてよかった。' %>
+                </div>
+
+                <p>予約リンク</p>
+                <div class="textBox-newpost">
+                  <%= f.text_field :url, :class =>"text" %>
+                  <label class="error"></label>
+                </div>
+
+                <br>
+                
+                <%= f.submit "投稿", :class=> "navbar-brand" %>
+                <% end %>
+                
+              </div>
+
+
+              <div class="modal-footer">
+                  <div type="button" class="navbar-brand" data-dismiss="modal">閉じる</div>
+
+              </div>
+            </div>
+            </div>
+          </div>
+        
+  </div>
+</header>
+
+<br><br><br><br><br><br>
+
+  <div class='bus-image'>
+    <div class="explain">
+      <span>ラクに移動したい。<br>
+      そんなあなたに<br>
+      好みの夜行バスを<br>
+      見つけられる<br>
+      サービス。</span>
+    </div>
+  </div>
+
+<h2>座席タイプ紹介</h2>
+  <div class="row">
+    <div class="col-lg">
+      <div class="seats">
+        
+        <div class="rounded">
+          <p>4列</p>
+          <img src="/assets/seat4.jpg" class="rounded">
+        </div>
+        <div class="rounded">
+          <p>3列独立</p>
+          <img src="/assets/seat3.jpg" class="rounded">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg">
+      <div class="seats">
+        <div class="rounded">
+          <p>3列</p>
+          <img src="/assets/seat2-1.jpg" class="rounded">
+        </div>
+        <div class="rounded">
+          <p>2列</p>
+          <img src="/assets/seat2.jpg" class="rounded">
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  <h2>投稿一覧</h2>
+    
+    
+
+  <div class="row">
+          <% @posted.each do |t| %>
+    <div class="col-lg-6">
+      <div class="posts-container">
+
+              <div class="username">
+              <% if user_signed_in? %>
+                <span class='title'><a href="/users/<%= t.user.id %>"><%= t.user.name %>
+                </a>
+                </span>
+              <% end %>
+              </div>
+           
+              <!--（t.user.age）階層構造になっている!-->
+              <div class="field">
+                <span><%= t.age %><%= t.user.gender %></span>
+              </div>
+              <div class="field">
+                <span class='title'>バスブランド名</span><br>
+                <span><%= t.busname.truncate(10) %></span>
+              </div>
+              <div class="field">
+                <span class='title'>座席タイプ</span><br>
+                <span><%= t.seattype %></span>
+              </div>
+              <div class="field">
+                <span class='title'>寝心地</span><br>
+                <span><%= t.sleep %></span>
+              </div>
+              <div class="field">
+                <span class='title'>三密度</span><br>
+                <span><%= t.crowd %></span>
+              </div>
+              <div class="field">
+                <span><%= t.price %>円</span>
+              </div>
+              
+              <div class="field">
+              <% if user_signed_in? %>
+                  <% if current_user.already_liked?(t) %>
+                    <%= link_to post_like_path(id: t.id, post_id: t.id), method: :delete do %>
+                      <i class="fas fa-heart"></i><%= t.likes.count %>
+                    <% end %>
+                  <% else %>
+                    <%= link_to post_likes_path(id: t.id, post_id: t.id), method: :post do %>
+                      <i class="fas fa-heart"></i><%= t.likes.count %>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <i class="fas fa-heart"></i><%= t.likes.count %>
+              <% end %>
+              </div>
+              
+              <div class="all-buttons">
+                <%= link_to post_path(t.id), method: :get  do %>
+                <button class="button">詳細</button>
+                <% end %>
+
+                <% if user_signed_in? && current_user.id == t.user_id %> 
+                <!--<%= t.user.email %>!-->
+                <%= link_to edit_post_path(t.id), method: :get  do %>
+                <button class="button">編集</button>
+                <% end %>
+                <%= button_to "削除", post_path(t.id), method: :delete , class:'button' %>
+                <% end %>
+              </div>
+      </div>
+    </div>
+            
+    <% end %>
+  </div>
+
+    <%= paginate @posted %>
+

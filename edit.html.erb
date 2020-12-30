@@ -1,0 +1,107 @@
+<header>
+
+  <div class="header-container">
+
+    <div class="header-container2">
+      <%= link_to image_tag("application-logo-header.png", class:"application-logo-header"), "/" %>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item active">
+              <%= link_to "ホーム", posts_path, {class: "navbar-brand"} %>
+            </li>
+
+            <li class="nav-item active">
+              <% if user_signed_in? %>
+              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete , class: "navbar-brand" %>
+              <% else %> 
+              <%= link_to "ログイン", new_user_session_path , class: "navbar-brand" %>
+              <% end %>
+            </li>
+          </ul> 
+        </div>
+    </nav>
+  </div>
+</header>
+
+<br><br><br><br><br><br><br><br>
+
+  <div class="profile">
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "users/shared/error_messages", resource: resource %>
+
+      <div class="stuff">
+
+        <p>ペンネーム</p>
+        <div class="textBox">
+          <%= f.text_field :name, :class =>"text", :autofocus=> true %>
+          <label class="error"></label>
+        </div>
+
+        <div class="field">
+          <label class="btn btn-warning">
+            <input type="radio" name="user[gender]" autocomplete="off" autofocus="true" value="男性"> 男性
+          </label>
+          <label class="btn btn-warning">
+            <input type="radio" name="user[gender]" autocomplete="off" autofocus="true" value="女性"> 女性
+          </label>
+        </div>
+
+        <p>プロフィール</p>
+        <div class="textBox">
+        <%= f.text_area :profile %>
+        </div>
+
+        <p>メールアドレス</p>
+        <div class="textBox">
+          <%= f.email_field :email, :class =>"text", :autofocus=> true %>
+          <label class="error"></label>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
+        <p>現在のパスワード</p>
+        <div class="textBox">
+          <%= f.password_field :current_password, :class =>"text", :autofocus=> true %>
+          <label class="error"></label>
+        </div>
+
+        <p>新しいパスワード(<%= @minimum_password_length %> 文字以上)</p>
+        <div class="textBox">
+          <%= f.password_field :password, :class =>"text", :autofocus=> true %>
+          <% if @minimum_password_length %>
+          <% end %>
+          <label class="error"></label>
+        </div>
+
+        <p>パスワードの確認</p>
+        <div class="textBox">
+          <%= f.password_field :password_confirmation, :class =>"text", :autofocus=> true %>
+          <label class="error"></label>
+        </div>      
+
+      </div>
+
+      <div class="all-buttons">
+        <%= f.submit '更新', :class=>'button' %><br>
+        <%= link_to user_path(current_user[:id]) do %>
+        <button class="button">戻る</button>
+        <% end %>
+      </div>
+    <% end %>
+    
+    <div class="button-delete">
+      <%= button_to "アカウントを削除", registration_path(resource_name), data: { confirm: "本当によろしいですか?" }, method: :delete, class: "button-account" %>
+    </div>
+
+      
+  </div>

@@ -1,0 +1,409 @@
+// Place all the styles related to the posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+// SCSSを分けている理由→作りやすくしているため。どのSCSSファイルに書いてもすべてに反映される。
+// クラスに定義づけはかぶったらあかん！！そのためにSASSが便利だよ~
+// SASS→一番外側のクラスが違っていたら影響しあわないので、SASSは安全！！
+// わかりやすいのは、「ファイル名をそのままクラス名にしよう」
+// 例）Top/index
+// <div class = 'top_index'>
+// このファイルでそのままSASSを使おう！！
+// このファイルはそのまま自動的にCSSファイルに自動で変換してくれる
+.header-container{
+  display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: linear-gradient(white, #cccccc);
+    position: fixed;
+    width: 100%;
+    height: 150px;
+    z-index: 1500;
+}
+.header-container2{
+  display: flex;
+    flex-direction: row;
+    background: linear-gradient(white, #cccccc);
+    height: 150px;
+    z-index: 1500;
+    margin-left: 2%;
+}
+img.application-logo-header{
+  width: 200px;
+  height: 150px;
+  z-index: 1;
+}
+.navbar{
+  background: linear-gradient(white, #cccccc);
+  padding-right: fixed;
+  justify-content: flex-end !important;
+  font-size: 120% !important;
+}
+.navbar-brand{
+  font-size: 1.3em !important;
+}
+.navbar-brand:hover{
+  color: red !important;
+  font-size: 1.3em !important;
+  font-weight: bolder;
+}
+@media screen and (max-width: 992px) {
+  /* スマホ用のスタイル */
+  .navbar-toggler{
+    padding-right: fixed;
+    font-size: 3.5em !important;
+  }
+}
+@media screen and (min-width: 993px) {
+  /* PC用のスタイル */
+  .navbar-toggler{
+    background: none !important;
+  }
+}
+@media screen and (max-width: 992px) {
+  // navbar動作中
+  .collapsing.navbar-collapse{
+    padding: 10%;
+    border-radius: 10px 10px 10px 10px;
+    background: linear-gradient(white, #cccccc) !important;
+    margin: 15%;
+    font-size: 1.7rem; 
+  }
+}
+@media screen and (max-width: 992px) {
+  //　レスポンシブ
+.collapse.navbar-collapse{
+    padding: 10%;
+    border-radius: 10px 10px 10px 10px;
+    background: linear-gradient(white, #cccccc) !important;
+    margin: 15%;
+    font-size: 1.7rem;
+  }
+}
+.stuff-modal {
+  width: 100%;
+  padding: 0 10% 0 10%;
+  p{
+    text-align: center;
+    font-size: 2rem;
+    padding-bottom: 32px;
+  }
+}
+.btn-warning{
+  border-radius: 2.25rem !important;
+  font-size: 2.125rem !important;
+}
+.modal-content{
+  width: 137% !important;
+}
+.modal-title{
+  font-size: 2.0rem;
+}
+.field{
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 10% 0 10% 0;
+  span{
+    font-size: 1.75rem;
+  }
+  .title{
+    font-size: 2.125rem;
+  }
+}
+// 新規投稿下線フォーム
+.textBox-newpost {
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-top: 10px;
+  height: 45px;
+  display: inline-flex;
+  margin-bottom: 3vh;
+}
+.textBox-newpost .text {
+  font-weight: 500;
+  width: calc(100% - 2vw);
+  height: 84px;
+  padding-left: 0.5vw;
+  background-color: transparent;
+  color: #222222;
+  position: absolute;
+  bottom: 0px;
+  outline: none;
+  border-style: solid;
+  border-color: orange;
+  border-width: 0px 0px 2px 0px;
+  font-size: 2.25rem;
+  -webkit-transition: border-color 0.45s linear;
+  transition: border-color 0.45s linear;
+}
+.textBox-newpost > input.text:focus {
+  border-color: #FF6600;
+}
+.textBox-newpost .label {
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 1;
+  color: #C0C0C0;
+  position: absolute;
+  padding-left: 0.5vw;
+  bottom: 3px;
+  font-size: 3rem;
+  font-weight: 300;
+  -webkit-transition-property: opacity bottom font-size;
+  transition-property: opacity bottom font-size;
+  -webkit-transition-duration: 0.45s;
+  transition-duration: 0.45s;
+  -webkit-transition-timing-function: cubic-bezier(.68,-0.55,.27,1.55);
+  transition-timing-function: cubic-bezier(.68,-0.55,.27,1.55);
+}
+.textBox-newpost .error {
+  position: absolute;
+  margin-top: 48px;
+  width: 100%;
+  color: #e74c3c;
+  text-align: center;
+}
+.textBox-newpost > input.text:focus ~ .label, .textBox > input.text:not([value=""]) ~ .label {
+  opacity: 1;
+  z-index: 1;
+  bottom: 55%;
+  font-size: 3rem;
+}
+.textBox-newpost > input.text:focus ~ .label {
+  color: #FF6600;
+}
+.textBox-newpost ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #FF6600;
+  font-size: 3rem;
+  font-weight: 200;
+  font-family: 'Roboto', sans-serif;
+}
+.bus-image{
+  position: relative;
+  background-size: cover;
+  background-image: url(reborn.jpg);
+  width: 100%;
+  height: 550px;
+  background-repeat: no-repeat;
+  object-fit: cover;
+}
+.explain{
+  position: relative;
+  text-align: center;
+  height: 100%;
+  background: rgba(255,255,255,0.5);
+  span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    font-size: 3rem;
+    font-weight: bolder;
+  }
+}
+// 「投稿一覧」「座席タイプ紹介」の記述
+h2{
+  text-align: center;
+  margin-top: 70px !important;
+  margin-bottom: 30px !important;
+  font-weight: bolder !important;
+}
+.seats{
+  display: flex;
+  .rounded{
+    text-align: center;
+    width: 100%;
+    height: auto;
+    margin: 1%;
+    p{
+      font-size: 2rem;
+    }
+  }
+}
+.profile{
+  height: 100%;
+  background-color: #FFDAB9	;
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, .5);
+  border-radius: 40px 40px 40px 40px;
+  margin: 5% 5% 5% 5%;
+  padding: 3% 5% 3% 5%;
+}  
+.posts-container{
+  padding: 4%;
+  margin: 0% 5% 10% 5%;
+  justify-content: center;
+  background-color: #ffdab9;
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, .5);
+  border-radius: 40px 40px 40px 40px;
+}
+.username{
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 10% 0 10% 0;
+  span{
+    font-size: 1.75rem;
+  }
+  .title{
+    font-size: 2.125rem;
+  }
+  a{
+    color: white;
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    border: solid 3px #FF4F02;
+    border-radius: 10px;
+    background-color: orange;
+  }
+  a:hover{
+    color: white;
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    border: solid 3px #FF4F02;
+    border-radius: 10px;
+    font-weight: bolder;
+    background-color: orange;
+  }
+}
+.stuff {
+  width: 100%;
+  padding: 0 10% 0 10%;
+  p{
+    text-align: center;
+    font-size: 2rem;
+    padding-bottom: 32px;
+  }
+}
+.pagination{
+  justify-content: center;
+  font-size: 200% !important;
+  display: flex;
+}
+//　下線フォーム
+.textBox {
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-top: 10px;
+  height: 45px;
+  display: inline-flex;
+  margin-bottom: 2.0625rem;
+}
+.textBox .text {
+  font-weight: 500;
+  width: calc(100% - 2vw);
+  height: 84px;
+  padding-left: 0.5vw;
+  background-color: transparent;
+  color: #000011;
+  position: absolute;
+  bottom: 0px;
+  outline: none;
+  border-style: solid;
+  border-color: orange;
+  border-width: 0px 0px 5px 0px;
+  font-size: 3rem;
+  -webkit-transition: border-color 0.45s linear;
+  transition: border-color 0.45s linear;
+}
+.textBox > input.text:focus {
+  border-color: #FF6600;
+}
+.textBox .label {
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 1;
+  color: #C0C0C0;
+  position: absolute;
+  padding-left: 0.5vw;
+  bottom: 3px;
+  font-size: 3rem;
+  font-weight: 300;
+  -webkit-transition-property: opacity bottom font-size;
+  transition-property: opacity bottom font-size;
+  -webkit-transition-duration: 0.45s;
+  transition-duration: 0.45s;
+  -webkit-transition-timing-function: cubic-bezier(.68,-0.55,.27,1.55);
+  transition-timing-function: cubic-bezier(.68,-0.55,.27,1.55);
+}
+.textBox .error {
+  position: absolute;
+  margin-top: 48px;
+  width: 100%;
+  color: #e74c3c;
+  text-align: center;
+}
+.textBox > input.text:focus ~ .label, .textBox > input.text:not([value=""]) ~ .label {
+  opacity: 1;
+  z-index: 1;
+  bottom: 55%;
+  font-size: 3rem;
+}
+.textBox > input.text:focus ~ .label {
+  color: #FF6600;
+}
+.textBox ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #FF6600;
+  font-size: 3rem;
+  font-weight: 200;
+  font-family: 'Roboto', sans-serif;
+}
+.snses{
+  display: flex;
+  padding-bottom: 3%;
+  margin-left: 3%;
+}
+.sns{
+  width: 13%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+// 各ページのボタンの親要素
+.all-buttons{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+.button{
+  color: #fff;
+  background-color: #eb6100;
+  border-radius: 40px 40px 40px 40px;
+  margin: 0px 6px;
+  width: 8rem;
+  height: 6rem;
+  font-size: 2rem;
+}
+.button:hover{
+  color: #fff;
+  background: #f56500;
+  border-radius: 40px 40px 40px 40px;
+  width: 8rem;
+  height: 6rem;
+  font-size: 2rem;
+}
+.button-regi-login{
+  color: #fff;
+  background-color: #eb6100;
+  border-radius: 40px 40px 40px 40px;
+  margin: 0px 10px;
+  width: 180px;
+  height: 100px;
+  font-size: 2rem;
+}
+.button-regi-login:hover{
+  color: #fff;
+  background: #f56500;
+  border-radius: 40px 40px 40px 40px;
+  width: 180px;
+  height: 100px;
+  font-size: 2rem;
+}
+.row{
+  margin-right: 15px !important;
+  margin-left: 15px !important;
+}
